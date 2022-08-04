@@ -8,6 +8,8 @@ editor: visual
 ```{r}
 #| warning: false
 #| echo: false
+#this won't show code but will show outputs
+
 #specific quarto language to hide code. #| = "hashpipe"
 
 library(tidyverse)
@@ -24,7 +26,7 @@ This code would usually be run in console....informational
 
 ```{r}
 #| include: false 
-# this will still run code, but won't show on document.
+# this will still run code, but won't show code or output on document.
 
 # Tell me the column names.
 names(penguins)
@@ -39,3 +41,41 @@ head(penguins)
 tail(penguins)
 
 ```
+
+```{r}
+#summary stats using skimr
+skim(penguins)
+```
+
+```{r}
+# intersection between variables. overview summary grid
+#| include = false
+GGally::ggpairs(penguins)
+
+```
+
+## Jitter plot
+
+Flipper length by species. Jitter plots show a lot of data, allows you to interpret something about distribution without hiding data in summary stats.
+
+```{r}
+#| fig.cap = "Insert figure caption."
+ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) + geom_jitter(width = 0.2,
+                                                                               alpha = 0.5,#alpha changes transparency of some points?
+                                                                               aes(color = species)) +
+  geom_boxplot(fill = NA) +
+  theme_light() + scale_color_manual(values = c("darkorchid4", "cyan4", "goldenrod")) +
+  labs(x = "Species", y = "Flipper length (mm)",
+       title = "Archipelago Penguin Flippers") #must be within aes() bc it's based on variable?
+
+#Add titles/labels.
+
+```
+
+## Histogram
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm)) + geom_histogram(aes(fill = species), color = "black") +
+  facet_wrap(~species, ncol = 1)
+```
+
