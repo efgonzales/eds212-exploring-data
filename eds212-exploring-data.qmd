@@ -1,0 +1,41 @@
+---
+title: "Day 4 - Exploring Data"
+author: "Elise Gonzales"
+format: html
+editor: visual
+---
+
+```{r}
+#| warning: false
+#| echo: false
+#specific quarto language to hide code. #| = "hashpipe"
+
+library(tidyverse)
+library(palmerpenguins)
+library(GGally)
+library(skimr)
+```
+
+## Exploratory Data Viz
+
+Check out your data before any analysis.
+
+This code would usually be run in console....informational
+
+```{r}
+#| include: false 
+# this will still run code, but won't show on document.
+
+# Tell me the column names.
+names(penguins)
+
+# What are the dimensions of the data?
+dim(penguins)
+
+# Show first six lines:
+head(penguins)
+
+# Show last six lines:
+tail(penguins)
+
+```
